@@ -1,5 +1,13 @@
 # Nexus
 
+GitHub хранит **код**, а не запущенный сайт. Next.js с API нельзя открыть как страницу прямо из репозитория.
+
+**Чтобы открыть мессенджер в браузере**, один раз задеплой на Vercel (вход через GitHub):
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/albert-braun/cooperative-messenger)
+
+После деплоя Vercel даст ссылку вида `https://cooperative-messenger-….vercel.app`. Её можно вставить в CV как live demo.
+
 Корпоративный мессенджер в стиле Slack: три колонки, тёмная тема, mock-данные и полноценный продуктовый каркас — не лендинг и не магазин.
 
 ## Стек

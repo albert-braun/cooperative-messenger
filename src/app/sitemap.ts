@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/shared/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://nexus-messenger.example/",
+      url: `${getSiteUrl()}/`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppProviders } from "@/shared/providers/app-providers";
+import { getSiteUrl } from "@/shared/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nexus-messenger.example"),
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: "Nexus — corporate messenger for focused teams",
     template: "%s · Nexus",
