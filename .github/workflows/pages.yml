@@ -17,20 +17,26 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_STATIC: "1"
+      NEXT_PUBLIC_BASE_PATH: /cooperative-messenger
+      NEXT_PUBLIC_SITE_URL: https://albert-braun.github.io/cooperative-messenger
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run build:static
-        env:
-          NEXT_PUBLIC_STATIC: "1"
-          NEXT_PUBLIC_BASE_PATH: /cooperative-messenger
-          NEXT_PUBLIC_SITE_URL: https://albert-braun.github.io/cooperative-messenger
+      - name: Remove server-only routes
+        run: |
+          mkdir -p .static-skip
+          mv src/app/api .static-skip/api
+          mv src/middleware.ts .static-skip/middleware.ts
+          ls src/app
+      - run: npx next build
       - run: touch out/.nojekyll
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: out
 
