@@ -2,6 +2,7 @@
   "name": "nexus",
   "version": "0.1.0",
   "private": true,
+  "description": "Slack-style corporate messenger with workspaces, channels, DMs, and role-based chat.",
   "scripts": {
     "dev": "node ./node_modules/next/dist/bin/next dev",
     "build": "node ./node_modules/next/dist/bin/next build",

@@ -1,58 +1,36 @@
 # Nexus
 
-**Live demo:** [https://albert-braun.github.io/cooperative-messenger/](https://albert-braun.github.io/cooperative-messenger/)
+Slack-style **corporate messenger** for teams: switch workspaces, open channels and DMs, and chat in a dark three-column UI.
 
-Корпоративный мессенджер в стиле Slack: три колонки, тёмная тема, mock-данные и полноценный продуктовый каркас — не лендинг и не магазин.
+**[Live demo](https://albert-braun.github.io/cooperative-messenger/)**
 
-## Стек
+## What it does
 
-- **Next.js 16** (App Router, SSR, metadata, `robots` / `sitemap`)
-- **React 19 + TypeScript**
-- **Tailwind CSS 4**
-- **TanStack Query** — серверное состояние, infinite messages, optimistic send, retry/error
-- **Zustand** — UI: активный воркспейс/канал, мобильная навигация, черновики
-- **Vitest + Testing Library** — unit/integration
-- **Playwright** — E2E: логин → отправка сообщения
+- **Workspace rail** — switch HQ / Design Lab, open your profile
+- **Sidebar** — `#general`, `#random`, and Direct Messages with online / away / offline status
+- **Chat** — channel header, infinite message history, custom composer (Enter to send)
+- **Roles** — Admin (full access), Member (write + delete own messages), Guest (read-only)
+- **Mobile** — sidebars collapse into a drawer
 
-## Что показывает проект (для CV)
+Mock users and messages are included so the app runs without a backend. Locally it also exposes a real Next.js API with cookie auth.
 
-| Тема | Где смотреть |
-| --- | --- |
-| Реальный API | `src/app/api/**` |
-| Auth / roles / permissions | cookie-сессия, admin / member / guest, `src/features/auth/permissions.ts` |
-| Async-state и error handling | Query + `error.tsx` + Retry banners |
-| Architecture | `entities` / `features` / `shared` / `server` / `store` |
-| Accessibility | landmarks, `aria-*`, skip-link, Escape, focusable composer |
-| Performance | пагинация сообщений, `memo`, `content-visibility` |
-| SEO | SSR лендинг, Open Graph, noindex для `/app` |
-| Безопасность клиента | sanitize HTML, origin check, HttpOnly cookie, security headers |
-| Баги после релиза | optimistic rollback, error boundary, 403 для guest |
+**Stack:** Next.js · TypeScript · Tailwind CSS · TanStack Query · Zustand
 
-## Запуск
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Открой [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000). Password for every demo account: `nexus-demo`
 
-Демо-аккаунты (пароль `nexus-demo`):
-
-- `alex@nexus.dev` — Admin
-- `maya@nexus.dev` — Member
-- `guest@nexus.dev` — Guest (только чтение)
+| Email | Role |
+| --- | --- |
+| `alex@nexus.dev` | Admin |
+| `maya@nexus.dev` | Member |
+| `guest@nexus.dev` | Guest |
 
 ```bash
 npm test
-npx playwright install chromium
-npm run test:e2e
 ```
-
-## Интерфейс
-
-1. Узкий rail — воркспейсы и профиль
-2. Сайдбар — `#general`, `#random`, Direct Messages со статусами online/away/offline
-3. Чат — шапка канала, бесконечная лента вверх, кастомный composer внизу
-
-На мобильных сайдбары складываются в drawer (кнопка меню в шапке).
