@@ -2,6 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/shared/api/client";
+import { homePath } from "@/shared/lib/paths";
 
 export const queryKeys = {
   me: ["me"] as const,
@@ -46,7 +47,7 @@ export function useLogout() {
     mutationFn: api.logout,
     onSuccess: () => {
       client.clear();
-      window.location.href = "/";
+      window.location.href = homePath();
     },
   });
 }

@@ -15,6 +15,7 @@ import { ChannelSidebar } from "@/features/shell/channel-sidebar";
 import { WorkspaceRail } from "@/features/shell/workspace-rail";
 import { roleLabel } from "@/features/auth/permissions";
 import { cn } from "@/shared/lib/cn";
+import { homePath } from "@/shared/lib/paths";
 import { ErrorBanner } from "@/shared/ui/error-banner";
 import { useUiStore } from "@/store/ui-store";
 
@@ -35,6 +36,13 @@ export function MessengerShell() {
   const workspace = workspaces.data?.find((item) => item.id === workspaceId);
   const channelList = channels.data ?? [];
   const activeChannel = channelList.find((item) => item.id === channelId);
+
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_STATIC !== "1") return;
+    if (me.isError) {
+      window.location.href = homePath();
+    }
+  }, [me.isError]);
 
   useEffect(() => {
     if (!channelList.length) return;

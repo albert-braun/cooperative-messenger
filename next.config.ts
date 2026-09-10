@@ -1,15 +1,16 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import type { NextConfig } from "next";
 
-const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+const isStatic = process.env.NEXT_PUBLIC_STATIC === "1";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const nextConfig: NextConfig = {
+  output: isStatic ? "export" : undefined,
+  basePath: basePath || undefined,
+  trailingSlash: isStatic,
+  images: { unoptimized: true },
   poweredByHeader: false,
-  turbopack: {
-    root: projectRoot,
-  },
   async headers() {
+    if (isStatic) return [];
     return [
       {
         source: "/(.*)",

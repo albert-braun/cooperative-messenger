@@ -6,16 +6,12 @@ import type {
   User,
   Workspace,
 } from "@/entities/types";
+import { localApi } from "@/shared/api/local";
+import { ApiError } from "@/shared/api/errors";
 
-export class ApiError extends Error {
-  status: number;
+export { ApiError };
 
-  constructor(status: number, message: string) {
-    super(message);
-    this.name = "ApiError";
-    this.status = status;
-  }
-}
+const useLocal = process.env.NEXT_PUBLIC_STATIC === "1";
 
 async function request<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, {
@@ -42,7 +38,7 @@ async function request<T>(url: string, init?: RequestInit): Promise<T> {
   return (await response.json()) as T;
 }
 
-export const api = {
+const remoteApi = {
   me: () => request<SessionUser>("/api/auth/me"),
   login: (payload: { userId?: string; email?: string; password?: string }) =>
     request<SessionUser>("/api/auth/login", {
@@ -67,3 +63,5 @@ export const api = {
   deleteMessage: (messageId: string) =>
     request<{ ok: true }>(`/api/messages/${messageId}`, { method: "DELETE" }),
 };
+
+export const api = useLocal ? localApi : remoteApi;

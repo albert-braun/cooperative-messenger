@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node ./node_modules/next/dist/bin/next dev",
     "build": "node ./node_modules/next/dist/bin/next build",
+    "build:static": "node ./scripts/prepare-static.mjs",
     "start": "node ./node_modules/next/dist/bin/next start",
     "lint": "node ./node_modules/eslint/bin/eslint.js",
     "test": "node ./node_modules/vitest/vitest.mjs run",

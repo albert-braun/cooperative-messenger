@@ -1,13 +1,10 @@
 import { LoginForm } from "@/features/auth/login-form";
-import { getCurrentUser } from "@/server/session";
-import { redirect } from "next/navigation";
+import { StaticHomeRedirect } from "@/features/auth/static-home-redirect";
 
-export default async function HomePage() {
-  const user = await getCurrentUser();
-  if (user) redirect("/app");
-
+export default function HomePage() {
   return (
     <main className="relative min-h-dvh overflow-hidden">
+      <StaticHomeRedirect />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(139,124,255,0.22),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(62,224,197,0.12),transparent_28%)]"
