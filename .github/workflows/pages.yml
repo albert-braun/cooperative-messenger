@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_STATIC: "1"
@@ -33,19 +33,10 @@ jobs:
           mkdir -p .static-skip
           mv src/app/api .static-skip/api
           mv src/middleware.ts .static-skip/middleware.ts
-          ls src/app
       - run: npx next build
       - run: touch out/.nojekyll
-      - uses: actions/upload-pages-artifact@v4
+      - uses: peaceiris/actions-gh-pages@v4
         with:
-          path: out
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          force_orphan: true
