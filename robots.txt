@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /app
+Disallow: /api/
+
+Sitemap: https://albert-braun.github.io/cooperative-messenger/sitemap.xml
