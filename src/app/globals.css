@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0b0d12;
+  --foreground: #e8eaef;
+  --nx-rail: #07080c;
+  --nx-sidebar: #10131a;
+  --nx-panel: #151924;
+  --nx-elevated: #1b2130;
+  --nx-border: rgba(255, 255, 255, 0.08);
+  --nx-muted: #8b93a7;
+  --nx-accent: #8b7cff;
+  --nx-accent-2: #3ee0c5;
+  --nx-danger: #ff6b7a;
+  --nx-online: #3dd68c;
+  --nx-away: #f0b429;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--nx-accent) 40%, transparent);
+}
+
+.nx-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #2c3344 transparent;
+}
+
+.nx-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nx-scroll::-webkit-scrollbar-thumb {
+  background: #2c3344;
+  border-radius: 999px;
+}
+
+textarea {
+  field-sizing: content;
+}
